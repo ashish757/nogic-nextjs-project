@@ -1,0 +1,120 @@
+.wrapper:not(.editing):hover {
+  z-index: 5;
+}
+
+.wrapper.deleted {
+  display: none;
+}
+
+.note {
+  padding: 1rem 1.6rem 0rem 1rem;
+  border-radius: 0.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+.note .info {
+  display: none;
+}
+
+.note .btns {
+  margin-top: 0.7rem;
+  padding-bottom: 0.2rem;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.note .btns svg {
+  height: 1.6rem;
+  color: #6d6d6d;
+  padding: 0.2rem;
+}
+
+.note .btns svg:hover {
+  background-color: rgba(0, 0, 0, 0.089);
+  border-radius: 50%;
+}
+
+.note:hover .btns {
+  opacity: 1;
+}
+
+.note:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  -webkit-box-shadow: 3px 3px 7px 1px rgba(96, 96, 255, 0.295);
+          box-shadow: 3px 3px 7px 1px rgba(96, 96, 255, 0.295);
+}
+
+.note .title {
+  color: #0f0f0f;
+  font-size: 1.1rem;
+}
+
+.note .description {
+  color: #6d6d6d;
+  margin: 0.8rem 0 0 0;
+  font-size: 1rem;
+  white-space: pre-line;
+}
+
+.wrapper.editing .note {
+  position: fixed;
+  top: 50% !important;
+  left: 50% !important;
+  -webkit-transform: translate(-50%, -50%) scale(1.15);
+          transform: translate(-50%, -50%) scale(1.15);
+  z-index: 999;
+  width: 25rem;
+  max-width: 80%;
+}
+
+.wrapper.editing .note .title {
+  padding: 0.5rem;
+}
+
+.wrapper.editing .note .description {
+  margin: 0;
+  padding: 0.5rem;
+  height: 10rem;
+}
+
+.wrapper.editing .note :focus-visible {
+  outline: 1px solid #e1e1ff;
+}
+
+.wrapper.editing .note .info {
+  display: block;
+  float: right;
+  color: #8686fc;
+  font-size: 0.75rem;
+}
+
+.wrapper.editing .note .info p {
+  margin: 0;
+}
+
+.wrapper.editing .note .btns {
+  opacity: 1;
+  border-top: #e1e1ff 1px solid;
+  padding: 0.1rem 0rem;
+}
+
+@media (max-width: 600px) {
+  .note .btns {
+    opacity: 1;
+    border-top: #e1e1ff 1px solid;
+  }
+}

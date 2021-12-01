@@ -1,0 +1,22 @@
+@import './scss/vars';
+
+::placeholder {
+  color: $primary-dark;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Roboto", "Oxygen", sans-serif;
+  background: $bg-color;
+  overflow-y: scroll;
+}
+
+main.center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

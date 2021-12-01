@@ -1,0 +1,73 @@
+@import "../scss/vars";
+.takenote {
+  margin-top: 3.5rem;
+  border-radius: 0.4rem;
+  background-color: $primary-light;
+  width: 30rem;
+  max-width: 90%;
+
+  .title,
+  .desc {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &-input {
+      background: transparent;
+      padding: 1rem 1.5rem;
+      font-size: 1.2rem;
+      width: 100%;
+      box-sizing: border-box;
+      color: $primary-dark;
+      border: none;
+      outline: none;
+    }
+  }
+  .desc-input {
+    font-size: 1.1rem;
+    min-height: 5rem;
+    overflow-y: auto;
+    padding-bottom: 0;
+    padding-top: 0;
+    resize: none;
+  }
+
+  .btns {
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    max-height: 0rem;
+  }
+
+  .savebtn {
+    border: 1px solid #7070ff;
+    padding: 0.5rem 1.5rem;
+    color: #7070ff;
+    background: #d3d3ff80;
+    border-radius: 5rem;
+    transition: all 0.1s ease-in-out;
+    margin-left: auto;
+    &:hover {
+      background-color: #7070ff;
+      color: $bg-color;
+    }
+  }
+  
+  .desc {
+    display: none;
+  }
+  
+  &.active {
+    .btns {
+      max-height: min-content;
+      visibility: visible;
+    padding: 0rem 1rem 0.5rem 1rem;
+
+    }
+    .desc {
+      display: block;
+    }
+    
+  }
+}

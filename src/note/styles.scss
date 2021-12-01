@@ -1,0 +1,102 @@
+@import "../scss/vars";
+
+.wrapper:not(.editing):hover {
+  z-index: 5;
+}
+.wrapper.deleted {
+  display: none;
+}
+
+.note {
+  padding: 1rem 1.6rem 0rem 1rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  transform: scale(1);
+  transition: all 0.1s ease-in-out;
+
+  .info {
+    display: none;
+  }
+  .btns {
+    margin-top: 0.7rem;
+    padding-bottom: 0.2rem;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    svg {
+      height: 1.6rem;
+      color: $text;
+      padding: 0.2rem;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.089);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &:hover .btns {
+    opacity: 1;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 3px 3px 7px 1px rgba(96, 96, 255, 0.295);
+  }
+  .title {
+    color: $text-dark;
+    font-size: 1.1rem;
+  }
+  .description {
+    color: $text;
+    margin: 0.8rem 0 0 0;
+    font-size: 1rem;
+    white-space: pre-line;
+  }
+}
+
+.wrapper.editing .note {
+  position: fixed;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(1.15);
+  z-index: 999;
+  width: 25rem;
+  max-width: 80%;
+
+  .title {
+    padding: 0.5rem;
+  }
+  .description {
+    margin: 0;
+    padding: 0.5rem;
+    height: 10rem;
+  }
+  :focus-visible {
+    outline: 1px solid $bg-color;
+  }
+  .info {
+    display: block;
+    float: right;
+    color: $primary;
+    font-size: 0.75rem;
+    p {
+      margin: 0;
+    }
+  }
+
+  .btns {
+    opacity: 1;
+    border-top: $bg-color 1px solid;
+    padding: 0.1rem 0rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .note {
+    .btns {
+      opacity: 1;
+      border-top: $bg-color 1px solid;
+    }
+  }
+}

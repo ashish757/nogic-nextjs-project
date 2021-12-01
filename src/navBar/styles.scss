@@ -1,0 +1,53 @@
+@import "../scss/vars";
+
+nav.nav {
+  background-color: $primary;
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .search {
+    width: 30rem;
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    span {
+      svg {
+        height: 1.7rem;
+        width: 1.7rem;
+      }
+      display: flex;
+    align-items: center;
+      color: $primary-dark;
+      position: absolute;
+      right: .5rem;
+      border-radius: 50%;
+      padding: .3rem;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.13);
+      }
+    }
+    input {
+      border-radius: 0.4rem;
+      flex-grow: 1;
+      padding: 0.8rem 0rem 0.8rem 2rem;
+      font-size: 1.3rem;
+      width: 100%;
+      outline: none;
+      background-color: rgb(195, 195, 236);
+      border: none;
+      color: $primary;
+      
+      &:focus {
+        background-color: #fff;
+      }
+    }
+    input::placeholder {
+      color: $primary;
+    }
+  }
+}

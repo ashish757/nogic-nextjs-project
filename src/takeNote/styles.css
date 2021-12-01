@@ -1,0 +1,84 @@
+.takenote {
+  margin-top: 3.5rem;
+  border-radius: 0.4rem;
+  background-color: #a9a9ff;
+  width: 30rem;
+  max-width: 90%;
+}
+
+.takenote .title,
+.takenote .desc {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.takenote .title-input,
+.takenote .desc-input {
+  background: transparent;
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #7070ff;
+  border: none;
+  outline: none;
+}
+
+.takenote .desc-input {
+  font-size: 1.1rem;
+  min-height: 5rem;
+  overflow-y: auto;
+  padding-bottom: 0;
+  padding-top: 0;
+  resize: none;
+}
+
+.takenote .btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  visibility: hidden;
+  max-height: 0rem;
+}
+
+.takenote .savebtn {
+  border: 1px solid #7070ff;
+  padding: 0.5rem 1.5rem;
+  color: #7070ff;
+  background: #d3d3ff80;
+  border-radius: 5rem;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  margin-left: auto;
+}
+
+.takenote .savebtn:hover {
+  background-color: #7070ff;
+  color: #e1e1ff;
+}
+
+.takenote .desc {
+  display: none;
+}
+
+.takenote.active .btns {
+  max-height: -webkit-min-content;
+  max-height: -moz-min-content;
+  max-height: min-content;
+  visibility: visible;
+  padding: 0rem 1rem 0.5rem 1rem;
+}
+
+.takenote.active .desc {
+  display: block;
+}
