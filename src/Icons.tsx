@@ -1,5 +1,3 @@
-import React from "react"
-
 const Delete = (props: any) => {
     return (
         <svg onClick={props.clickHandler} viewBox="0 0 24 24">

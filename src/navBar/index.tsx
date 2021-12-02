@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import { Close } from "../Icons";
 import './styles.css';
 
-const NavBar = () => {
+const NavBar: React.FunctionComponent  = () => {
 	const [query, setQuery] = useState('')
 	let navigate = useNavigate()
 	useEffect(() => {

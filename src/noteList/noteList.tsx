@@ -3,10 +3,12 @@ import Note from '../note';
 import globalContext from "../globalState";
 import './noteList.css'
 
-const NoteList = (props: { search?: boolean, query?: String }) => {
+const NoteList: React.FunctionComponent<any>  = (props) => {
 
   const coverRef = useRef(null)
-  const { state : {notes} } = useContext(globalContext)
+  const { state } = useContext(globalContext)
+
+console.log("STATE", state);
 
 
   let titleNotes: Array<any> = [];
@@ -27,7 +29,7 @@ const NoteList = (props: { search?: boolean, query?: String }) => {
   }
 
   if (props.search) {
-    notes.map((note: any) => {
+    state.notes.map((note: any) => {
 
       if (note.title.toLowerCase().includes(props.query)) {
         titleNotes.push(note)
@@ -63,7 +65,7 @@ const NoteList = (props: { search?: boolean, query?: String }) => {
           </>
           :
           <div className="grid">
-            {notes.map((note: any) => {
+            {state.notes.map((note: any) => {
               return <Note key={note.id} note={note} ref={coverRef} abc={abc} />
             })}
           </div>

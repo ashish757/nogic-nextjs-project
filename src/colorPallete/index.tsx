@@ -4,7 +4,7 @@ import colorCode from "../colorCodes";
 import './styles.css'
 
 
-const ColorPallete = (props: any) => {
+const ColorPallete: React.FunctionComponent<{callback: any, activeColor: any}>  = (props) => {
     const [activeColor, setActiveColor] = useState(props.activeColor)
     const menu: any = useRef(null)
 

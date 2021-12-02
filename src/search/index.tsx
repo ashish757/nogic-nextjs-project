@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import './styles.css';
 import NoteList from "../noteList/noteList";
 
-const SearchResults = (props: any) => {
+const SearchResults: React.FunctionComponent<any> = () => {
 
     const param = useParams()
     return (

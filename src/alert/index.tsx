@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css'
 
-const Alert = ({title, handler1, handler2, btn1, btn2}: any) => {
+const Alert: React.FunctionComponent<any>  = ({title, handler1, handler2, btn1, btn2}) => {
     return (
         <div className="alert">
             <p>{title}</p>

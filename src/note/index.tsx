@@ -46,7 +46,7 @@ const Note = React.forwardRef(({ note, abc }: any, ref: any) => {
     const deleteNoteTimeout = () => {
         dispatch({ type: "REMOVE_NOTE", id: note.id })
     }
-    const deleteNote = (e: React.MouseEvent, action: string) => {
+    const deleteNote = (e: React.MouseEvent) => {
         e.stopPropagation()
         if (isEditing) {
             ref.current.classList.remove("active")
