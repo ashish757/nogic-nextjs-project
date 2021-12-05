@@ -34,7 +34,7 @@ const ColorPallete: React.FunctionComponent<{callback: any, activeColor: any}>  
         props.callback(color)
     }
 
-    return (<div className="colorbtn" >
+    return (<div className="colorbtn" onClick={(e) => e.stopPropagation()}>
         <Pallete />
         <div className={"menu"} onClick={(e) => e.stopPropagation()} ref={menu}>
             {
