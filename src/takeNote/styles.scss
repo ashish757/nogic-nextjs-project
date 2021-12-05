@@ -46,7 +46,7 @@
     color: #7070ff;
     background: #d3d3ff80;
     border-radius: 5rem;
-    transition: all 0.1s ease-in-out;
+    transition: background-color, color 0.1s ease-in-out;
     margin-left: auto;
     &:hover {
       background-color: #7070ff;

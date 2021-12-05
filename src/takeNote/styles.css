@@ -57,8 +57,8 @@
   color: #7070ff;
   background: #d3d3ff80;
   border-radius: 5rem;
-  -webkit-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
+  -webkit-transition: background-color, color 0.1s ease-in-out;
+  transition: background-color, color 0.1s ease-in-out;
   margin-left: auto;
 }
 
