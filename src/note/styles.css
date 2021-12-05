@@ -100,6 +100,9 @@
   float: right;
   color: #8686fc;
   font-size: 0.75rem;
+  position: absolute;
+  right: 2rem;
+  bottom: 2.2rem;
 }
 
 .wrapper.editing .note .info p {
