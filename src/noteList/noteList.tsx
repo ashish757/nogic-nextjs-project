@@ -1,18 +1,18 @@
-import React, { useContext, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Note from '../note';
-import globalContext from "../globalState";
 import './noteList.css'
 
-const NoteList: React.FunctionComponent<any>  = (props) => {
+const NoteList: React.FunctionComponent<any> = (props) => {
 
   const coverRef = useRef(null)
-  const { state } = useContext(globalContext)
+  const [notes, setNotes] = useState(props.notes)
+  const [topResult, setTopResult] = useState([]);
+  const [otherResult, setOtherResult] = useState([]);
 
-console.log("STATE", state);
+  useEffect(() => {
+    setNotes(props.notes)
+  }, [props.notes])
 
-
-  let titleNotes: Array<any> = [];
-  let descNotes: Array<any> = [];
 
   const abc = () => {
     let undoDeletes = Array.from(document.querySelectorAll('.alert'))
@@ -28,18 +28,29 @@ console.log("STATE", state);
     }
   }
 
-  if (props.search) {
-    state.notes.map((note: any) => {
+  useEffect(() => {
+    if (props.search) {
+      fetch("http://nogic-apis.42web.io/api/search_notes.php?search=" + props.query).then(data => data.json()).then(res => {
+        console.log(res.top);
+        setTopResult(res.top)
+        setOtherResult(res.top)
+      });
+    }
+  }, [props.query, props.search])
 
-      if (note.title.toLowerCase().includes(props.query)) {
-        titleNotes.push(note)
-      }
-      else if (note.desc.toLowerCase().includes(props.query)) {
-        descNotes.push(note)
-      }
-      return null
-    })
-  }
+
+
+  // legacy code
+  // state.notes.map(async (y) => {
+  // if (note.title.toLowerCase().includes(props.query)) {
+  //   titleNotes.push(note)
+  // }
+  // else if (note.desc.toLowerCase().includes(props.query)) {
+  //   descNotes.push(note)
+  // }
+  // return null
+  // })
+
   console.count("NOTELIST RENDERED")
   return (
     <>
@@ -50,7 +61,7 @@ console.log("STATE", state);
             <div className="searchDivider">Top Results</div>
             <div className="grid">
 
-              {titleNotes.length > 0 ? titleNotes.map((note: any) => {
+              {topResult.length > 0 ? topResult.map((note: any) => {
                 return <Note key={note.id} note={note} ref={coverRef} abc={abc} />
               }) : "NO MATCHES FOUND"}
             </div>
@@ -58,14 +69,14 @@ console.log("STATE", state);
             <div className="searchDivider">Others</div>
             <div className="grid">
 
-              {descNotes.length > 0 ? descNotes.map((note: any) => {
+              {otherResult.length > 0 ? otherResult.map((note: any) => {
                 return <Note key={note.id} note={note} ref={coverRef} abc={abc} />
               }) : "NO MATCHES FOUND"}
             </div>
           </>
           :
           <div className="grid">
-            {state.notes.map((note: any) => {
+            {notes.map((note: any) => {
               return <Note key={note.id} note={note} ref={coverRef} abc={abc} />
             })}
           </div>

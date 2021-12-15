@@ -1,16 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import TakeNote from '../takeNote/TakeNote';
 import NoteList from '../noteList/noteList';
 import './styles.css'
-import globalContext from '../globalState';
 
 
-const Home: React.FunctionComponent  = () => {
-  const {dispatch} = useContext(globalContext)
+const Home: React.FunctionComponent = () => {
+  const [notes, setNotes] = useState([])
+  useEffect(() => {
+    fetch("http://nogic-apis.42web.io/api/get_notes.php").then(data => data.json()).then(res => {
+      setNotes(res);
+    });
+  }, [])
+
   return (
     <main className='center'>
-        <TakeNote dispatch={dispatch} />
-        <NoteList />
+      <TakeNote setNotes={setNotes} />
+      <NoteList notes={notes} />
     </main>
   )
 }

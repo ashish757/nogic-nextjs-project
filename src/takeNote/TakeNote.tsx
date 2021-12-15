@@ -1,16 +1,18 @@
 import React, { useRef, useState } from "react";
 import './styles.css';
-import colorCode from "../colorCodes";
 import ColorPallete from "../colorPallete";
 
-const TakeNote = React.memo(({ dispatch }: any) => {
+const TakeNote = React.memo(({ setNotes }: any) => {
 	const takenote: any = useRef(null)
 	const textareaRef: any = useRef(null)
-	let noteColor: any = (localStorage.getItem('createNoteColor') ? localStorage.getItem('createNoteColor') : "default")
-	const [note, setNote] = useState({ title: "", desc: "", color:  noteColor})
+	let locl: any = localStorage.getItem('createNoteColor');
+	
+	let color: any = locl ? JSON.parse(locl)["color"] : "default"
+	let colorCode: any = locl ? JSON.parse(locl)["colorCode"] : "#faeaea"
+
+	const [note, setNote] = useState({ title: "", desc: "", color, colorCode })
 	const [isTakeNoteActive, setIsTakeNoteActive] = useState(false)
-
-
+	
 	const handler = (e: any) => {
 		if (e.target.name === "title") setNote({ ...note, title: e.target.value })
 		if (e.target.name === "desc") {
@@ -24,25 +26,37 @@ const TakeNote = React.memo(({ dispatch }: any) => {
 
 	const saveNote = () => {
 		console.log(note);
-		const id = new Date().getTime().toString()
 		if (!note.title.trim() && !note.desc.trim()) {
 			setIsTakeNoteActive(false)
 		}
-		else if (note.title.trim() && !note.desc.trim()) {
-			console.log("have title but no desc");
-			dispatch({ type: "ADD_NOTE", id, title: note.title, desc: note.title, color: note.color })
-		}
-		else if (!note.title.trim() && note.desc.trim()) {
-			console.log("have title but no desc");
-			dispatch({ type: "ADD_NOTE", id, title: note.desc.split(" ").slice(0, 4).join(" "), desc: note.desc, color: note.color })
-		}
 		else {
-			dispatch({ type: "ADD_NOTE", id, title: note.title, desc: note.desc, color: note.color })
+			fetch("http://nogic-apis.42web.io/api/create_note.php", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					title: note.title ? note.title : note.desc.split(" ").slice(0, 4).join(" "),
+					description: note.desc ? note.desc : note.title,
+					color: note.color,
+				})
+			}).then(data => data.json()).then(res => {
+				console.log(res)
+				setNotes((prev: any) => {
+					return [...prev, {
+						id: res.data.id,
+						color: res.data.color,
+						title: res.data.title,
+						description: res.data.description,
+						dateCreated: res.data.dateCreated,
+						dateModified: res.data.dateModified
+					}]
+				})
+			})
 		}
 		setIsTakeNoteActive(false)
-		setNote((prev) => {return { title: "", desc: "", color: prev.color }})
+		setNote((prev) => { return { title: "", desc: "", color: prev.color, colorCode: prev.colorCode } })
 	}
-
 
 	const focusHandler = (event: any) => {
 		if (!isTakeNoteActive) {
@@ -66,14 +80,14 @@ const TakeNote = React.memo(({ dispatch }: any) => {
 		document.addEventListener('click', documentHandler)
 
 	}
-	const colorBtnCallback = (color: string) => {
-		setNote({...note, color: color})
-		localStorage.setItem('createNoteColor', color)
+	const colorBtnCallback = (color: string, colorCode: string) => {
+		setNote({ ...note, color, colorCode })
+		localStorage.setItem('createNoteColor', JSON.stringify({color, colorCode}))
 	}
 
 	console.count("TAKENOTE RENDERED");
 	return (
-		<div className={"takenote" + (isTakeNoteActive ? " active" : "")} ref={takenote} style={{background: colorCode[note.color]}}>
+		<div className={"takenote" + (isTakeNoteActive ? " active" : "")} ref={takenote} style={{ background: note.colorCode }}>
 			<div className="takenote-inputs">
 				<div className="title">
 					<input className="title-input" value={note.title} name="title" type="text" placeholder="Take Note.." onChange={handler} onClick={focusHandler} />
