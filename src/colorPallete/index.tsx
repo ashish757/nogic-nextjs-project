@@ -26,7 +26,7 @@ const ColorPallete: React.FunctionComponent<{callback: any, activeColor: any}>  
     })
 
     useEffect(() => {
-        fetch("http://nogic-apis.herokuapp.com/api/get_colors.php").then(data => data.json()).then(res => {
+        fetch("https://nogic-apis.herokuapp.com/api/get_colors.php").then(data => data.json()).then(res => {
             console.log(res)
             setColorCodes(res)
         });

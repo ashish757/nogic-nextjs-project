@@ -7,7 +7,7 @@ import './styles.css'
 const Home: React.FunctionComponent = () => {
   const [notes, setNotes] = useState([])
   useEffect(() => {
-    fetch("http://nogic-apis.herokuapp.com/api/get_notes.php").then(data => data.json()).then(res => {
+    fetch("https://nogic-apis.herokuapp.com/api/get_notes.php").then(data => data.json()).then(res => {
       setNotes(res);
     });
   }, [])
