@@ -30,7 +30,7 @@ const TakeNote = React.memo(({ setNotes }: any) => {
 			setIsTakeNoteActive(false)
 		}
 		else {
-			fetch("http://nogic-apis.42web.io/api/create_note.php", {
+			fetch("http://nogic-apis.herokuapp.com/api/create_note.php", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"

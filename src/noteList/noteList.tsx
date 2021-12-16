@@ -30,7 +30,7 @@ const NoteList: React.FunctionComponent<any> = (props) => {
 
   useEffect(() => {
     if (props.search) {
-      fetch("http://nogic-apis.42web.io/api/search_notes.php?search=" + props.query).then(data => data.json()).then(res => {
+      fetch("http://nogic-apis.herokuapp.com/api/search_notes.php?search=" + props.query).then(data => data.json()).then(res => {
         console.log(res.top);
         setTopResult(res.top)
         setOtherResult(res.top)

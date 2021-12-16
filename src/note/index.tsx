@@ -20,7 +20,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
             const endEditing = (e: any) => {
 
                 if (note.title !== titleNode.current.innerText || note.description !== descNode.current.innerText) {
-                    fetch("http://nogic-apis.42web.io/api/edit_note.php", {
+                    fetch("http://nogic-apis.herokuapp.com/api/edit_note.php", {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
@@ -54,7 +54,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
         SetIsEditing(true)
     }
     const deleteNoteTimeout = () => {
-        fetch("http://nogic-apis.42web.io/api/delete_note.php?id=" + note.id, {
+        fetch("http://nogic-apis.herokuapp.com/api/delete_note.php?id=" + note.id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -86,7 +86,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
     }
 
     const colorBtnCallback = (color: string,colorCode: string) => {
-        fetch("http://nogic-apis.42web.io/api/edit_note_color.php", {
+        fetch("http://nogic-apis.herokuapp.com/api/edit_note_color.php", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
