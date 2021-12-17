@@ -6,7 +6,10 @@ const TakeNote = React.memo(({ setNotes }: any) => {
 	const takenote: any = useRef(null)
 	const textareaRef: any = useRef(null)
 	let locl: any = localStorage.getItem('createNoteColor');
-	
+	if (locl && locl.length < 20) {
+		localStorage.removeItem("createNoteColor")
+		locl = null;
+	}
 	let color: any = locl ? JSON.parse(locl)["color"] : "default"
 	let colorCode: any = locl ? JSON.parse(locl)["colorCode"] : "#faeaea"
 
@@ -30,7 +33,7 @@ const TakeNote = React.memo(({ setNotes }: any) => {
 			setIsTakeNoteActive(false)
 		}
 		else {
-			fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/create_note.php", {
+			fetch(process.env.REACT_APP_API_DOMAIN+ "create_note.php", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -46,6 +49,7 @@ const TakeNote = React.memo(({ setNotes }: any) => {
 					return [...prev, {
 						id: res.data.id,
 						color: res.data.color,
+						colorCode: res.data.colorCode,
 						title: res.data.title,
 						description: res.data.description,
 						dateCreated: res.data.dateCreated,

@@ -11,8 +11,11 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Roboto", "Oxygen", sans-serif;
-  background: $bg-color;
   overflow-y: scroll;
+  background-image: url("./b.jpg");
+  background-color: $bg-color;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 main.center {

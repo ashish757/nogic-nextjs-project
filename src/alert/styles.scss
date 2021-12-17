@@ -23,7 +23,7 @@
     width: 100%;
     left: 0;
     bottom: 0;
-    animation: Alert 4.06s linear 1 ;
+    animation: Alert 3s linear 1 ;
   }
 
   .actions {
@@ -42,6 +42,12 @@
         
       }
     }
+  }
+}
+
+@media (max-width: 600px) {
+  .alert {
+    bottom: 1rem;
   }
 }
 

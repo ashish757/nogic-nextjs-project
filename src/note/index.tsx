@@ -20,7 +20,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
             const endEditing = (e: any) => {
 
                 if (note.title !== titleNode.current.innerText || note.description !== descNode.current.innerText) {
-                    fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/edit_note.php", {
+                    fetch(process.env.REACT_APP_API_DOMAIN+ "edit_note.php", {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
@@ -54,13 +54,13 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
         SetIsEditing(true)
     }
     const deleteNoteTimeout = () => {
-        fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/delete_note.php?id=" + note.id, {
+        setIsDeleted({ is: true, timeoutId: null });
+        fetch(process.env.REACT_APP_API_DOMAIN+ "delete_note.php?id=" + note.id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             }
         }).then(data => data.json()).then(res => {
-            setIsDeleted({ is: true, timeoutId: null });
             console.log(res)
         });
 
@@ -71,7 +71,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
             ref.current.classList.remove("active")
             SetIsEditing(false)
         }
-        let deleteSetTimeoutId: any = setTimeout(deleteNoteTimeout, 4000)
+        let deleteSetTimeoutId: any = setTimeout(deleteNoteTimeout, 3000)
         setIsDeleted({ is: true, timeoutId: deleteSetTimeoutId })
     }
     // UNDO
@@ -86,7 +86,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
     }
 
     const colorBtnCallback = (color: string,colorCode: string) => {
-        fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/edit_note_color.php", {
+        fetch(process.env.REACT_APP_API_DOMAIN+ "edit_note_color.php", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

@@ -1,0 +1,45 @@
+@import "../scss/vars";
+
+.loading-note {
+  background-color: #c4c4ff;
+  padding: 1rem 1.6rem 0rem 1rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  height: 120px;
+  div.content {
+    overflow: hidden;
+  }
+  .title,
+  .desc div {
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 0.3rem;
+  }
+
+  .title {
+    padding: 0.7rem 0;
+  }
+  .desc {
+    margin-top: 0.9rem;
+    div {
+      padding: 0.3rem 0;
+      margin-bottom: 0.5rem;
+      &:nth-child(2) {
+        width: 90%;
+      }
+      &:last-child {
+        margin-bottom: 0rem;
+        width: 50%;
+      }
+    }
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #babaf8;
+  }
+
+  100% {
+    background-color: #8b8bf5;
+  }
+}

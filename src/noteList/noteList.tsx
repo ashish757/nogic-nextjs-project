@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Note from '../note';
 import './noteList.css'
+import Loader from "../loader/loader";
 
 const NoteList: React.FunctionComponent<any> = (props) => {
 
   const coverRef = useRef(null)
-  const [notes, setNotes] = useState(props.notes)
+  const [notes, setNotes] = useState([])
   const [topResult, setTopResult] = useState([]);
   const [otherResult, setOtherResult] = useState([]);
 
@@ -30,10 +31,10 @@ const NoteList: React.FunctionComponent<any> = (props) => {
 
   useEffect(() => {
     if (props.search) {
-      fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/search_notes.php?search=" + props.query).then(data => data.json()).then(res => {
+      fetch(process.env.REACT_APP_API_DOMAIN+ "search_notes.php?search=" + props.query).then(data => data.json()).then(res => {
         console.log(res.top);
         setTopResult(res.top)
-        setOtherResult(res.top)
+        setOtherResult(res.other)
       });
     }
   }, [props.query, props.search])
@@ -61,24 +62,29 @@ const NoteList: React.FunctionComponent<any> = (props) => {
             <div className="searchDivider">Top Results</div>
             <div className="grid">
 
-              {topResult.length > 0 ? topResult.map((note: any) => {
+              {topResult ? ( topResult.length > 0 ? 
+              topResult.map((note: any) => {
                 return <Note key={note.id} note={note} ref={coverRef} abc={abc} />
-              }) : "NO MATCHES FOUND"}
+              }) : <Loader />)
+               : "NO MATCHES FOUND"}
             </div>
 
             <div className="searchDivider">Others</div>
             <div className="grid">
 
-              {otherResult.length > 0 ? otherResult.map((note: any) => {
+              {otherResult ? ( topResult.length > 0 ? 
+              otherResult.map((note: any) => {
                 return <Note key={note.id} note={note} ref={coverRef} abc={abc} />
-              }) : "NO MATCHES FOUND"}
+              })  : <Loader /> )
+              : "NO MATCHES FOUND"}
             </div>
           </>
           :
-          <div className="grid">
-            {notes.map((note: any) => {
+          <div className="grid"> 
+          {notes.length > 0 ? (notes.map((note: any) => {
               return <Note key={note.id} note={note} ref={coverRef} abc={abc} />
-            })}
+            })) : <Loader />
+            }
           </div>
         }
       </section>

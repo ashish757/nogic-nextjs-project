@@ -17,7 +17,7 @@ const ColorPallete: React.FunctionComponent<{callback: any, activeColor: any}>  
             menu.current.style.transform =  'none'
         }
 
-        if (position.right > window.innerWidth) {
+        if (position.right + 20 > window.innerWidth) {
             // if menu goes in right side
             menu.current.style.left =  "unset"
             menu.current.style.right =  "-1rem"
@@ -26,8 +26,8 @@ const ColorPallete: React.FunctionComponent<{callback: any, activeColor: any}>  
     })
 
     useEffect(() => {
-        fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/get_colors.php").then(data => data.json()).then(res => {
-            console.log(res)
+        fetch(process.env.REACT_APP_API_DOMAIN+ "get_colors.php").then(data => data.json()).then(res => {
+            // console.log(res)
             setColorCodes(res)
         });
     }, [])
@@ -37,7 +37,8 @@ const ColorPallete: React.FunctionComponent<{callback: any, activeColor: any}>  
         props.callback(color, colorCode)
     }
 
-
+    console.log("COLOR PALLETE RENDERED");
+    
     return (<div className="colorbtn" onClick={(e) => e.stopPropagation()}>
         <Pallete />
         <div className={"menu"} onClick={(e) => e.stopPropagation()} ref={menu}>
