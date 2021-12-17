@@ -20,7 +20,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
             const endEditing = (e: any) => {
 
                 if (note.title !== titleNode.current.innerText || note.description !== descNode.current.innerText) {
-                    fetch("https://" + process.env.REACT_APP_API_DOMAIN_PROD+ "/api/edit_note.php", {
+                    fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/edit_note.php", {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
@@ -54,7 +54,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
         SetIsEditing(true)
     }
     const deleteNoteTimeout = () => {
-        fetch("https://" + process.env.REACT_APP_API_DOMAIN_PROD+ "/api/delete_note.php?id=" + note.id, {
+        fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/delete_note.php?id=" + note.id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -86,7 +86,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
     }
 
     const colorBtnCallback = (color: string,colorCode: string) => {
-        fetch("https://" + process.env.REACT_APP_API_DOMAIN_PROD+ "/api/edit_note_color.php", {
+        fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/edit_note_color.php", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

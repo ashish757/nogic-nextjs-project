@@ -30,7 +30,7 @@ const NoteList: React.FunctionComponent<any> = (props) => {
 
   useEffect(() => {
     if (props.search) {
-      fetch("https://" + process.env.REACT_APP_API_DOMAIN_PROD+ "/api/search_notes.php?search=" + props.query).then(data => data.json()).then(res => {
+      fetch("https://" + process.env.REACT_APP_API_DOMAIN+ "/api/search_notes.php?search=" + props.query).then(data => data.json()).then(res => {
         console.log(res.top);
         setTopResult(res.top)
         setOtherResult(res.top)
