@@ -6,6 +6,7 @@ import './styles.css'
 
 const Home: React.FunctionComponent = () => {
   // const { dispatch } = useContext(globalContext)
+  
   //  useEffect(() => {
     //  dispatch({type: "LOAD_NOTES"})
   //  eslint-disable-next-line react-hooks/exhaustive-deps
