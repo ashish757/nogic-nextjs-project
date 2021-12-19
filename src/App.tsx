@@ -14,15 +14,15 @@ const App: React.FunctionComponent  = () => {
   document.title = "Nogic - Notes with magic"
   const [state, dispatch] = useReducer(reducer, data)
   useEffect(() => {
-    if (localStorage.getItem('notes')) {
-      const data: any = localStorage.getItem('notes')
-      dispatch({ type: "LOAD_NOTES", notes: JSON.parse(data) })
-    }
+    // if (localStorage.getItem('notes')) {
+    //   const data: any = localStorage.getItem('notes')
+    //   dispatch({ type: "LOAD_NOTES", notes: JSON.parse(data) })
+    // }
   }, [])
   return (
     <div className="App">
-      <NavBar />
         <globalContext.Provider value={{ state, dispatch }}>
+      <NavBar />
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/search/:query' element={<SearchResults />} />

@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import './styles.css';
 import ColorPallete from "../colorPallete";
+import globalContext from "../globalState";
 
-const TakeNote = React.memo(({ setNotes }: any) => {
+const TakeNote = React.memo(() => {
+	const {dispatch} = useContext(globalContext);
 	const takenote: any = useRef(null)
 	const textareaRef: any = useRef(null)
 	let locl: any = localStorage.getItem('createNoteColor');
@@ -44,18 +46,10 @@ const TakeNote = React.memo(({ setNotes }: any) => {
 					color: note.color,
 				})
 			}).then(data => data.json()).then(res => {
-				console.log(res)
-				setNotes((prev: any) => {
-					return [...prev, {
-						id: res.data.id,
-						color: res.data.color,
-						colorCode: res.data.colorCode,
-						title: res.data.title,
-						description: res.data.description,
-						dateCreated: res.data.dateCreated,
-						dateModified: res.data.dateModified
-					}]
-				})
+				console.log(res.data)
+
+				dispatch({type: "ADD_NOTE", note: res.data})
+
 			})
 		}
 		setIsTakeNoteActive(false)

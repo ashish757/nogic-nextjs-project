@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import './styles.css'
 import { Delete } from "../Icons";
 import ColorPallete from "../colorPallete";
 import Alert from "../alert";
+import globalContext from "../globalState";
 
 const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
+    const {dispatch} = useContext(globalContext)
     const [isDeleted, setIsDeleted] = useState<{ is: Boolean, timeoutId: any }>({ is: false, timeoutId: null })
     const [isEditing, SetIsEditing] = useState(false)
     const [note, setNote] = useState(original)
@@ -28,11 +30,21 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
                         body: JSON.stringify({
                             id: note.id,
                             title: titleNode.current.innerText,
-                            desc: descNode.current.innerText,
+                            description: descNode.current.innerText,
                         })
-                    }).then(data => data.json()).then(res => {
-                        console.log(res)
-                        setNote({...note, title: titleNode.current.innerText, description: descNode.current.innerText})
+                    }).then(data => data.json()).then(() => {
+
+                        // setNote({...note, title: titleNode.current.innerText, description: descNode.current.innerText})
+                        // let notes: any = sessionStorage.getItem("notes")
+                        // const newUpdatedNotes = JSON.parse(notes).map((n: any) => {
+                        //     if (n.id === note.id) {
+                        //       return { ...n, title: titleNode.current.innerText, description: descNode.current.innerText }
+                        //     }
+                        //     return n
+                        //   })
+                    
+                        //   sessionStorage.setItem('notes', JSON.stringify(newUpdatedNotes))
+                          dispatch({type: "UPDATE_NOTE", id: note.id, title: titleNode.current.innerText, description: descNode.current.innerText})
                     });
                 }
 
@@ -62,6 +74,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
             }
         }).then(data => data.json()).then(res => {
             console.log(res)
+            dispatch({type: "DELETE_NOTE", id: note.id})
         });
 
     }

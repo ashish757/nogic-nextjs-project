@@ -4,6 +4,7 @@
   z-index: 5;
   transform: scale(1);
   transition: transform 0.1s ease-in-out;
+  border-radius: 0.5rem;
   &:hover {
     transform: scale(1.02);
     box-shadow: 3px 3px 7px 1px rgba(96, 96, 255, 0.295);
@@ -14,22 +15,24 @@
 }
 
 .note {
-  padding: 1rem 1.6rem 0rem 1rem;
   border-radius: 0.5rem;
-  align-items: center;
-
+  padding: 1rem 1.6rem 0rem 1rem;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
 
   .info {
     display: none;
   }
   .btns {
-    margin-top: 0.7rem;
-    padding-bottom: 0.2rem;
+    padding: 0.3rem;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     display: flex;
     justify-content: space-between;
-    svg {
+    align-self: normal;
+    margin-top: auto;
+    svg:not(.colorSVG) {
       height: 1.6rem;
       color: $text;
       padding: 0.2rem;
@@ -49,8 +52,8 @@
     font-size: 1.1rem;
   }
   .description {
-    color: $text;
-    margin: 0.8rem 0 0 0;
+    color: rgba(0, 0, 0, 0.603);
+    margin: 0.8rem 0 .3rem 0;
     font-size: 1rem;
     white-space: pre-line;
   }
@@ -72,7 +75,7 @@
   .description {
     margin: 0;
     padding: 0.5rem;
-    height: 10rem;
+    min-height: 10rem;
   }
   :focus-visible {
     outline: 1px solid $bg-color;
@@ -80,7 +83,7 @@
   .info {
     display: block;
     float: right;
-    color: $primary;
+    color: rgba(0, 0, 0, 0.432);
     font-size: 0.75rem;
     position: absolute;
     right: 2rem;
@@ -92,7 +95,7 @@
 
   .btns {
     opacity: 1;
-    border-top: $bg-color 1px solid;
+    border-top: rgba(0, 0, 0, 0.24) 1px solid;
     padding: 0.1rem 0rem;
   }
 }
@@ -101,7 +104,7 @@
   .note {
     .btns {
       opacity: 1;
-      border-top: $bg-color 1px solid;
+      border-top: rgba(0, 0, 0, 0.137) 1px solid;
     }
   }
 }
