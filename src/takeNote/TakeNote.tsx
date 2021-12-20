@@ -4,7 +4,7 @@ import ColorPallete from "../colorPallete";
 import globalContext from "../globalState";
 
 const TakeNote = React.memo(() => {
-	const {dispatch} = useContext(globalContext);
+	const { dispatch } = useContext(globalContext);
 	const takenote: any = useRef(null)
 	const textareaRef: any = useRef(null)
 	let locl: any = localStorage.getItem('createNoteColor');
@@ -17,7 +17,7 @@ const TakeNote = React.memo(() => {
 
 	const [note, setNote] = useState({ title: "", desc: "", color, colorCode })
 	const [isTakeNoteActive, setIsTakeNoteActive] = useState(false)
-	
+
 	const handler = (e: any) => {
 		if (e.target.name === "title") setNote({ ...note, title: e.target.value })
 		if (e.target.name === "desc") {
@@ -35,21 +35,30 @@ const TakeNote = React.memo(() => {
 			setIsTakeNoteActive(false)
 		}
 		else {
-			fetch(process.env.REACT_APP_API_DOMAIN+ "create_note.php", {
+			const title = note.title ? note.title : note.desc.split(" ").slice(0, 4).join(" ")
+			const description = note.desc ? note.desc : note.title
+			dispatch({
+				type: "ADD_NOTE", note: {
+					id: 1, 
+					title,
+					description,
+					color: note.color,
+					colorCode: note.colorCode
+				}
+			})
+			fetch(process.env.REACT_APP_API_DOMAIN + "create_note.php", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
 				},
 				body: JSON.stringify({
-					title: note.title ? note.title : note.desc.split(" ").slice(0, 4).join(" "),
-					description: note.desc ? note.desc : note.title,
+					title,
+					description,
 					color: note.color,
 				})
 			}).then(data => data.json()).then(res => {
 				console.log(res.data)
-
-				dispatch({type: "ADD_NOTE", note: res.data})
-
+				dispatch({ type: "CREATE_UPDATE_NOTE", id: 1, note: res.data })
 			})
 		}
 		setIsTakeNoteActive(false)
@@ -80,7 +89,7 @@ const TakeNote = React.memo(() => {
 	}
 	const colorBtnCallback = (color: string, colorCode: string) => {
 		setNote({ ...note, color, colorCode })
-		localStorage.setItem('createNoteColor', JSON.stringify({color, colorCode}))
+		localStorage.setItem('createNoteColor', JSON.stringify({ color, colorCode }))
 	}
 
 	console.count("TAKENOTE RENDERED");

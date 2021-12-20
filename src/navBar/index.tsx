@@ -21,6 +21,7 @@ const NavBar: React.FunctionComponent = () => {
 	}
 
 	const reloadNotes = () => {
+		dispatch({type: "DELETE_NOTES"})
 		const local: any = localStorage.getItem("sort")
 		const sort =JSON.parse(local)
 		fetch(`${process.env.REACT_APP_API_DOMAIN}get_notes.php?sortby=${sort["sortby"]}&orderby=${sort["orderby"]}`).then(res => {
@@ -58,10 +59,12 @@ const NavBar: React.FunctionComponent = () => {
 };
 
 
+
+
 const DropDown = () => {
 	const { dispatch } = useContext(globalContext)
 	const local: any = localStorage.getItem("sort")
-	const data = local ? JSON.parse(local) : { sortby: "title", orderby: "ASC" }
+	const data = local ? JSON.parse(local) : { sortby: "dateCreated", orderby: "DESC" }
 	const [sort, setSort] = useState<any>(data);
 	const dropDown = useRef<any>()
 
@@ -86,14 +89,15 @@ const DropDown = () => {
 		if (!data) {
 			localStorage.setItem("sort", JSON.stringify(sort))
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
+	
 	useEffect(() => {
+		dispatch({type: "DELETE_NOTES"})
 		fetch(`${process.env.REACT_APP_API_DOMAIN}get_notes.php?sortby=${sort["sortby"]}&orderby=${sort["orderby"]}`).then(res => {
 			return res.json()
 		}).then(data => {
 			console.log("FETECHED NOTES BY SORT");
-
 			dispatch({ type: "LOAD_NOTES", notes: data })
 		}
 		)
@@ -144,4 +148,5 @@ const DropDown = () => {
 		</div>
 	</div>
 }
+
 export default NavBar;

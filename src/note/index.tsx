@@ -99,6 +99,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
     }
 
     const colorBtnCallback = (color: string,colorCode: string) => {
+        setNote({...note, color: color, colorCode: colorCode})
         fetch(process.env.REACT_APP_API_DOMAIN+ "edit_note_color.php", {
             method: "PUT",
             headers: {
@@ -110,7 +111,7 @@ const Note = React.forwardRef(({note: original , abc }: any, ref: any,) => {
             })
         }).then(data => data.json()).then(res => {
             console.log(res)
-            setNote({...note, color: color, colorCode: colorCode})
+            dispatch({type: "UPDATE_NOTE_COLOR", id: note.id, color: color, colorCode: colorCode})
         });
     }
     let date = new Date(note.dateModified ? note.dateModified : note.dateCreated)

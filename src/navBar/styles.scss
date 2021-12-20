@@ -65,9 +65,9 @@ nav.nav {
     color: rgb(255, 255, 255);
     fill: rgb(255, 255, 255);
 
-
     .reload,
     .sort {
+      z-index: 8;
       font-size: 1.1rem;
       background: rgba(255, 255, 255, 0.144);
       display: flex;
@@ -77,112 +77,111 @@ nav.nav {
       padding: 0.3rem 0.5rem;
       cursor: pointer;
       transition: background 0.1s ease-in-out;
-
       &:hover {
         background-color: rgba(255, 255, 255, 0.438);
       }
-    }
-    
-    svg {
-      height: 1.3rem;
-      margin-left: 0.3rem;
-    }
-    p {
-      transform: translateY(-.1rem);
-    }
-    .sort {
-      position: relative;
-      &:before,
-      &:after,
+
+      svg {
+        height: 1.3rem;
+        margin-left: 0.3rem;
+      }
+      p {
+        transform: translateY(-0.1rem);
+      }
+      .sort {
+        position: relative;
+        &:before,
+        &:after,
+        .dropdown {
+          transition: opacity 0.3s ease-in-out;
+        }
+        &:hover::before,
+        &:hover::after,
+        &:hover .dropdown {
+          visibility: visible;
+          opacity: 1;
+        }
+        &::before {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          content: "";
+          bottom: -1.7rem;
+          left: -1.1rem;
+          width: 150%;
+          height: 1.7rem;
+          backdrop-filter: blur(5px);
+          z-index: 4;
+        }
+        &::after {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          content: "";
+          bottom: -1.3rem;
+          border-bottom: 1rem solid #6060fffd;
+          border-left: 0.7rem solid transparent;
+          border-right: 0.7rem solid transparent;
+          backdrop-filter: blur(5px);
+          z-index: 4;
+        }
+      }
+
       .dropdown {
-        transition: opacity 0.3s ease-in-out;
-      }
-      &:hover::before,
-      &:hover::after,
-      &:hover .dropdown {
-        visibility: visible;
-        opacity: 1;
-      }
-      &::before {
+        color: rgb(0, 0, 0);
+        z-index: 8;
         visibility: hidden;
         opacity: 0;
+        background-color: #7070ff7e;
+        backdrop-filter: blur(3px);
         position: absolute;
-        content: "";
-        bottom: -1.7rem;
-        left: -1.1rem;
-        width: 150%;
-        height: 1.7rem;
-        backdrop-filter: blur(5px);
-        z-index: 4;
-      }
-      &::after {
-        visibility: hidden;
-        opacity: 0;
-        position: absolute;
-        content: "";
-        bottom: -1.3rem;
-        border-bottom: 1rem solid #6060fffd;
-        border-left: 0.7rem solid transparent;
-        border-right: 0.7rem solid transparent;
-        backdrop-filter: blur(5px);
-        z-index: 4;
-      }
-    }
-
-    .dropdown {
-    color: rgb(0, 0, 0);
-
-      visibility: hidden;
-      opacity: 0;
-      background-color: #7070ff7e;
-      backdrop-filter: blur(3px);
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 3.4rem;
-      display: flex;
-      flex-direction: column;
-      border-radius: 0.3rem;
-      padding: 0.4rem 0rem;
-
-      .sortby {
-        border-bottom: 1px solid $primary;
-        padding-bottom: .5rem;
-        margin-bottom: .5rem;
-      }
-      .orderby,
-      .sortby {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 3.4rem;
         display: flex;
         flex-direction: column;
-        .option {
+        border-radius: 0.3rem;
+        padding: 0.4rem 0rem;
+
+        .sortby {
+          border-bottom: 1px solid $primary;
+          padding-bottom: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .orderby,
+        .sortby {
           display: flex;
-          align-items: center;
-          padding: .8rem 1rem;
-          
-          &:hover {
-            background: rgba(255, 255, 255, 0.363);
-          }
-          .checkbox {
-            margin-right: 0.4rem;
-            border: 1px solid rgb(34, 34, 34);
-            height: 1rem;
-            width: 1rem;
-            border-radius: 50%;
-            position: relative;
-          }
-          &.active .checkbox::before {
-            position: absolute;
-            content: '';
-            height: .5rem;
-            width: .5rem;
-            transform: translate(-50%, -50%);
-            background: rgb(56, 56, 56);
-            top: 50%;
-            left: 50%;
-            border-radius: 50%;
-          }
-          p {
-            min-width: max-content;
+          flex-direction: column;
+          .option {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+
+            &:hover {
+              background: rgba(255, 255, 255, 0.363);
+            }
+            .checkbox {
+              margin-right: 0.4rem;
+              border: 1px solid rgb(34, 34, 34);
+              height: 1rem;
+              width: 1rem;
+              border-radius: 50%;
+              position: relative;
+            }
+            &.active .checkbox::before {
+              position: absolute;
+              content: "";
+              height: 0.5rem;
+              width: 0.5rem;
+              transform: translate(-50%, -50%);
+              background: rgb(56, 56, 56);
+              top: 50%;
+              left: 50%;
+              border-radius: 50%;
+            }
+            p {
+              min-width: max-content;
+            }
           }
         }
       }
@@ -199,7 +198,8 @@ nav.nav {
       padding: 1rem 0;
     }
     .btns {
-      .reload, .sort {
+      .reload,
+      .sort {
         background-color: $primary;
         &:hover {
           background-color: $primary-dark;

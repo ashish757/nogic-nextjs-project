@@ -52,14 +52,14 @@ const ColorPallete: React.FunctionComponent<{ callback: any, activeColor: any }>
     return (<div className="colorbtn" onClick={(e) => e.stopPropagation()}>
         <Pallete />
         <div className={"menu"} onClick={(e) => e.stopPropagation()} ref={menu}>
-            {
+            {Object.keys(colorCodes).length > 0 ?
                 Object.keys(colorCodes).map((color: any) => {
                     return (<button key={color} onClick={() => setColorHandler(color, colorCodes[color])} className={activeColor === color ? "color active" : "color"} title={color} style={{ background: colorCodes[color] }}>
                         {activeColor === color ? <svg className={"colorSVG"} viewBox="0 0 24 24">
                             <path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
                         </svg> : ''}
                     </button>)
-                })
+                }) : "Loading..."
             }
 
         </div>
